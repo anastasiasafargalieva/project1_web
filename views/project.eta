@@ -1,0 +1,26 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Project</h1>
+<% it.rows.forEach(project => {%>
+    <%= project.name %>
+<% })%>
+<h2>Projects</h2>
+<ul>
+    <% it.projects.forEach( project => { %>
+    <li>
+        <%= project.description %>
+        <form method="POST" action="/projects/<%= it.rows[0].id%>/issues/<%= obj.id %>">
+            <input type="submit" value="Resolve issue"/>
+        </form>
+    </li>
+    <% });%>
+</ul>
+<h2>Add project</h2>
+
+<form method="POST" action="/projects/<%= it.rows[0].id%>/issues">
+    <input type="text" name="description" />
+    <input type="submit" value="Add issue"/>
+</form>
+
+
+<h2><a href="/projects">All projects</h2>

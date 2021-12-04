@@ -1,0 +1,21 @@
+<h1>Projects</h1>
+
+<h2>Add a project</h2>
+
+<form method="POST" action="/projects">
+  Name: <input type="text" name="name" />
+  <input type="submit" value="Create project!" />
+</form>
+
+<h2>Active projects</h2>
+
+<ul>
+<% it.rows.forEach((obj) => { %>
+  <li>
+    <a href="/projects/<%= obj.id%>"><%= obj.name %></a>
+  <form method="POST" action="/projects/<%= obj.id%>">
+    <input type="submit" value="Remove"/>
+  </form>
+  </li>
+<% }); %>
+</ul>
