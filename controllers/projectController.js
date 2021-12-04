@@ -1,6 +1,6 @@
 import { renderFile } from "https://deno.land/x/eta@v1.12.3/mod.ts";
 import * as projectService from "../services/projectService.js";
-import * as workEntryService from "../services/projectIssueService.js";
+import * as workEntryService from "../services/issueService.js";
 import * as requestUtils from "../utils/requestUtils.js";
 
 const responseDetails = {

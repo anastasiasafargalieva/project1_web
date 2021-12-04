@@ -1,4 +1,4 @@
-import * as workEntryService from "../services/projectIssueService.js";
+import * as workEntryService from "../services/issueService.js";
 import * as requestUtils from "../utils/requestUtils.js";
 
 const createWorkEntry = async (request) => {

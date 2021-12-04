@@ -1,43 +1,52 @@
 import { executeQuery } from "../database/database.js";
 
-const create = async (project_id, content) => {
-  await executeQuery("INSERT INTO project_issues (project_id, content) VALUES ($1, $2);", project, content);
-};
-
-/*const findAllProjects = async () => {
-  let result = await executeQuery(
-    "SELECT * FROM project_issues;",
+const createWorkEntry = async (project_id, description="") => {
+  await executeQuery(
+    "INSERT INTO project_issues  (project_id, description) VALUES ($1, $2);",
+    project_id,
+    description
   );
-  return result.rows;
 };
 
-const findById = async (id) => {
+const findCurrentWorkEntry = async (project_id) => {
   let result = await executeQuery(
-      "SELECT * FROM project_issues WHERE id=$1;",
-      id,
-    );
-    return result.rows;
-};*/
+    "SELECT * FROM project_issues WHERE project_id = $1;",
+    project_id,
+  );
 
-const findByProject = async (project_id) => {
-  let result = await executeQuery(
-      "SELECT * FROM project_issues WHERE project_id=$1;",
+  if (result.rows && result.rows.length > 0) {
+    return result.rows;
+  }
+
+  return []
+};
+
+const finishWorkEntry = async (id) => {
+  await executeQuery(
+    "DELETE from project_issues  WHERE id = $1;",
+    id,
+  );
+};
+
+const calculateTotalTime = async (project_id) => {
+    let result = await executeQuery(
+      `SELECT SUM(finished_on - started_on) AS total_time
+        FROM project_issues 
+        WHERE project_id = $1
+          AND finished_on IS NOT NULL`,
       project_id,
     );
-    return result.rows;
+  
+    if (result.rows && result.rows[0] && result.rows[0].total_time) {
+      return result.rows[0].total_time;
+    }
+  
+    return 0;
+  };
+
+export {
+  createWorkEntry,
+  findCurrentWorkEntry,
+  finishWorkEntry,
+  calculateTotalTime,
 };
-
-const deleteById = async (id) => {
-  let result = await executeQuery(
-      "DELETE FROM project_issues WHERE id = $1;",
-      id,
-    ); 
-    return result.rows;
-};
-
-export { create, findByProject, deleteById };
-
-/*
-const remove = async (id) => {
-  await executeQuery("DELETE FROM projects WHERE WHERE id = $1;", id);
-};*/

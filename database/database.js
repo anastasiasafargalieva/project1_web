@@ -2,10 +2,10 @@ import { Pool } from "https://deno.land/x/postgres@v0.13.0/mod.ts";
 
 const CONCURRENT_CONNECTIONS = 2;
 const connectionPool = new Pool({
-  hostname: "hostname-possibly-at-elephantsql.com",
-  database: "database-name",
-  user: "user-name-typically-same-as-database-name",
-  password: "password",
+  hostname: "abul.db.elephantsql.com",
+  database: "yuolksmx",
+  user: "yuolksmx",
+  password: "isGqI33SRMFVjhgD0fWa4BkL_AdBg9RU",
   port: 5432,
 }, CONCURRENT_CONNECTIONS);
 
