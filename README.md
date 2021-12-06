@@ -1,7 +1,7 @@
 # project1_web
 This is a project 1 of Web SoftWare developmnet course. 
 The application can be tried here: https://project1-anastasia-safargaliev.herokuapp.com/projects
-To run the application locally use ElephantSQL service and include your database information in the app.js file in the following order:
+To run the application locally use ElephantSQL service and include your database information in the database.js file in the following order:
 
 const client = new Client({
   hostname: "hostname-possibly-at-elephantsql.com",
