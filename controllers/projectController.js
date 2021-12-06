@@ -1,6 +1,6 @@
 import { renderFile } from "https://deno.land/x/eta@v1.12.3/mod.ts";
 import * as projectService from "../services/projectService.js";
-import * as workEntryService from "../services/issueService.js";
+import * as workEntryService from "../services/projectIssueService.js";
 import * as requestUtils from "../utils/requestUtils.js";
 
 const responseDetails = {
@@ -30,7 +30,7 @@ const viewProject = async (request) => {
     return new Response(await renderFile("project.eta", data), responseDetails);
   };
 
-const viewProjects = async (request) => {
+const viewAllProjects = async (request) => {
   const data = {
     projects: await projectService.findAllNonCompletedprojects(),
   };
@@ -46,4 +46,4 @@ const completeProject = async (request) => {
     return await requestUtils.redirectTo("/projects");
   };
 
-export { addProject, viewProject, viewProjects, completeProject };
+export { addProject, viewProject, viewAllProjects, completeProject };

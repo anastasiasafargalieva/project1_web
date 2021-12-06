@@ -28,25 +28,9 @@ const finishWorkEntry = async (id) => {
   );
 };
 
-const calculateTotalTime = async (project_id) => {
-    let result = await executeQuery(
-      `SELECT SUM(finished_on - started_on) AS total_time
-        FROM project_issues 
-        WHERE project_id = $1
-          AND finished_on IS NOT NULL`,
-      project_id,
-    );
-  
-    if (result.rows && result.rows[0] && result.rows[0].total_time) {
-      return result.rows[0].total_time;
-    }
-  
-    return 0;
-  };
 
 export {
   createWorkEntry,
   findCurrentWorkEntry,
   finishWorkEntry,
-  calculateTotalTime,
 };
